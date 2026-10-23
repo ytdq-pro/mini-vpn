@@ -1,8 +1,15 @@
 """Briques communes pour la version WebSocket (chiffrement + relais)."""
 import asyncio
+import hashlib
 import os
 
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+
+def derive_key(password: str) -> bytes:
+    """Dérive une clé AES-256 à partir du mot de passe partagé."""
+    return hashlib.scrypt(password.encode(), salt=b"mini-vpn-v1",
+                          n=2**14, r=8, p=1, dklen=32)
 
 
 def seal(aes: AESGCM, data: bytes) -> bytes:

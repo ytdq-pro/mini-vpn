@@ -13,8 +13,7 @@ import struct
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from websockets.asyncio.client import connect
 
-from common import derive_key
-from ws_common import relay, seal, unseal
+from ws_common import derive_key, relay, seal, unseal
 
 
 async def handle(reader, writer, args, aes):
